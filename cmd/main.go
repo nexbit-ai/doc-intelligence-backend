@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	router "nexbit/internal/router/v1"
@@ -39,6 +40,7 @@ func main() {
 	// port := os.Getenv("DB_PORT")
 	// sslmode := os.Getenv("DB_SSLMODE")
 
+	port := os.Getenv("PORT")
 	// // connStr := fmt.Sprintf("user=%s dbname=%s password=%s host=%s port=%s sslmode=%s",
 	// // 	user, dbname, password, host, port, sslmode)
 
@@ -63,7 +65,7 @@ func main() {
 	docService := service.NewDocService(externalDIClient)
 	router.DocRouter(app, docService)
 
-	if err := app.Listen(":3000"); err != nil {
+	if err := app.Listen(":" + port); err != nil {
 		fmt.Println("Error starting server:", err)
 	}
 }
