@@ -30,7 +30,7 @@ func main() {
 		AllowOrigins:     "*", // Specify your frontend URL(s)
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
-		AllowCredentials: true,
+		AllowCredentials: false,
 		// ExposeHeaders: "Content-Length,Content-Range",   // Uncomment if needed
 		// MaxAge: 3600,                                    // Preflight cache duration in seconds
 	}))
