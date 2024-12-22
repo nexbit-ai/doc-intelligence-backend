@@ -16,6 +16,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
@@ -23,6 +24,16 @@ func main() {
 	fmt.Println("Starting the server...")
 	app := fiber.New()
 
+	app.Use(cors.New())
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "*", // Specify your frontend URL(s)
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
+		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
+		AllowCredentials: true,
+		// ExposeHeaders: "Content-Length,Content-Range",   // Uncomment if needed
+		// MaxAge: 3600,                                    // Preflight cache duration in seconds
+	}))
 	// Add the recover middleware
 	app.Use(recover.New(recover.Config{
 		EnableStackTrace:  true,
