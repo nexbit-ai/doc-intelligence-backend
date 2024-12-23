@@ -76,7 +76,7 @@ func ProcessTableData(fetchedTables []models.Table) ([]models.ProcessedTableResp
 			return nil, fmt.Errorf("error processing table %d: %v", tableIndex, err)
 		}
 
-		if processedTable.Headers != nil || len(processedTable.Headers) != 0 {
+		if len(processedTable.Headers) != 0 {
 			TableList = append(TableList, *processedTable)
 		}
 	}
