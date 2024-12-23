@@ -31,7 +31,7 @@ func (s *docService) ParseDoc(ctx *fiber.Ctx, modelID string, reqBody models.Fet
 		return nil, err
 	}
 
-	time.Sleep(40 * time.Second)
+	time.Sleep(30 * time.Second)
 
 	operationLocation := uploadDocumentResp["Operation-Location"]
 
@@ -75,7 +75,10 @@ func ProcessTableData(fetchedTables []models.Table) ([]models.ProcessedTableResp
 		if err != nil {
 			return nil, fmt.Errorf("error processing table %d: %v", tableIndex, err)
 		}
-		TableList = append(TableList, *processedTable)
+
+		if processedTable.Headers != nil || len(processedTable.Headers) != 0 {
+			TableList = append(TableList, *processedTable)
+		}
 	}
 
 	return TableList, nil
