@@ -31,7 +31,7 @@ func (s *docService) ParseDoc(ctx *fiber.Ctx, modelID string, reqBody models.Fet
 		return nil, err
 	}
 
-	time.Sleep(30 * time.Second)
+	time.Sleep(15 * time.Second)
 
 	operationLocation := uploadDocumentResp["Operation-Location"]
 
