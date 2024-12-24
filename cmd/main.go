@@ -52,6 +52,9 @@ func main() {
 	// sslmode := os.Getenv("DB_SSLMODE")
 
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3001"
+	}
 	// // connStr := fmt.Sprintf("user=%s dbname=%s password=%s host=%s port=%s sslmode=%s",
 	// // 	user, dbname, password, host, port, sslmode)
 
