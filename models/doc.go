@@ -138,15 +138,25 @@ type BoundingRegion struct {
 
 // Fields contains all the invoice fields
 type Fields struct {
-	InvoiceDate            Field `json:"InvoiceDate"`
-	InvoiceId              Field `json:"InvoiceId"`
-	InvoiceTotal           Field `json:"InvoiceTotal"`
-	Items                  Field `json:"Items"`      // Changed this to Field type
-	TaxDetails             Field `json:"TaxDetails"` // Changed this as well
-	VendorAddress          Field `json:"VendorAddress"`
-	VendorAddressRecipient Field `json:"VendorAddressRecipient"`
-	VendorName             Field `json:"VendorName"`
-	VendorTaxId            Field `json:"VendorTaxId"`
+	InvoiceDate              Field `json:"InvoiceDate"`
+	InvoiceId                Field `json:"InvoiceId"`
+	InvoiceTotal             Field `json:"InvoiceTotal"`
+	Items                    Field `json:"Items"`      // Changed this to Field type
+	TaxDetails               Field `json:"TaxDetails"` // Changed this as well
+	VendorAddress            Field `json:"VendorAddress"`
+	VendorAddressRecipient   Field `json:"VendorAddressRecipient"`
+	VendorName               Field `json:"VendorName"`
+	VendorTaxId              Field `json:"VendorTaxId"`
+	BillingAddress           Field `json:"BillingAddress"`
+	BillingAddressRecipient  Field `json:"BillingAddressRecipient"`
+	CustomerName             Field `json:"CustomerName"`
+	CustomerTaxId            Field `json:"CustomerTaxId"`
+	PaymentTerm              Field `json:"PaymentTerm"`
+	PurchaseOrder            Field `json:"PurchaseOrder"`
+	ShippingAddress          Field `json:"ShippingAddress"`
+	ShippingAddressRecipient Field `json:"ShippingAddressRecipient"`
+	SubTotal                 Field `json:"SubTotal"`
+	TotalTax                 Field `json:"TotalTax"`
 }
 
 // Field represents a basic document field
