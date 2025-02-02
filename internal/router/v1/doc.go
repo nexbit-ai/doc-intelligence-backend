@@ -10,4 +10,5 @@ import (
 func DocRouter(app *fiber.App, docService docService.DocService) {
 	api := app.Group("/v1")
 	api.Post("/doc/parse", requesthandler.ParseDocHandler(docService))
+	api.Get("/health-check", requesthandler.HealthCheckHandler(docService))
 }
