@@ -14,7 +14,7 @@ import (
 )
 
 // const API_TOKEN = "4cnepI1BCmxxmbC2wcVaD3yE0EjmOqmWvhS9i3gtAHOLic7h7GpqJQQJ99ALACYeBjFXJ3w3AAALACOGr1PC"
-const BASE_URL = "https://nexbit-us-instance.cognitiveservices.azure.com/"
+const BASE_URL = "https://nexbitdoc.cognitiveservices.azure.com/"
 const API_VERSION = "2024-02-29-preview"
 
 type DIClientClient interface {
