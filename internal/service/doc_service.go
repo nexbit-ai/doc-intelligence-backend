@@ -70,7 +70,6 @@ func ProcessTableData(fetchedTables []models.Table) ([]models.ProcessedInvoice, 
 
 	var TableList []models.ProcessedInvoice
 
-	fmt.Println(len(fetchedTables))
 	for tableIndex, table := range fetchedTables {
 		processedTable, err := ProcessInvoiceData(table)
 		if err != nil {
@@ -197,8 +196,6 @@ func extractHeaderHierarchy(table models.Table) []models.HeaderColumn {
 		// Check for child headers
 		if cell.RowSpan < maxHeaderRow+1 {
 			children := extractChildHeaders(headerRows, cell, 1, maxHeaderRow)
-			fmt.Println("reeeeeached here")
-			fmt.Println(children)
 			header.Children = children
 		}
 
@@ -212,20 +209,20 @@ func extractHeaderHierarchy(table models.Table) []models.HeaderColumn {
 // extractChildHeaders recursively processes child headers
 func extractChildHeaders(headerRows map[int][]models.TableCell, parentCell models.TableCell, currentRow int, maxRow int) []models.HeaderColumn {
 	// Debug logging
-	fmt.Printf("Processing row %d (max: %d) for parent cell at col %d with span %d\n",
-		currentRow, maxRow, parentCell.ColumnIndex, parentCell.ColumnSpan)
+	// fmt.Printf("Processing row %d (max: %d) for parent cell at col %d with span %d\n",
+	// 	currentRow, maxRow, parentCell.ColumnIndex, parentCell.ColumnSpan)
 
 	children := make([]models.HeaderColumn, 0)
 
 	// Basic validation
 	if currentRow > maxRow {
-		fmt.Println("Stopping: currentRow > maxRow")
+		// fmt.Println("Stopping: currentRow > maxRow")
 		return children
 	}
 
 	// Validate row exists in map
 	if _, exists := headerRows[currentRow]; !exists {
-		fmt.Printf("Row %d not found in headerRows\n", currentRow)
+		// fmt.Printf("Row %d not found in headerRows\n", currentRow)
 		return children
 	}
 
@@ -234,7 +231,7 @@ func extractChildHeaders(headerRows map[int][]models.TableCell, parentCell model
 
 	// Validate column bounds
 	if startCol < 0 || endCol < startCol {
-		fmt.Printf("Invalid column bounds: start=%d, end=%d\n", startCol, endCol)
+		// fmt.Printf("Invalid column bounds: start=%d, end=%d\n", startCol, endCol)
 		return children
 	}
 
@@ -243,17 +240,17 @@ func extractChildHeaders(headerRows map[int][]models.TableCell, parentCell model
 
 	for col < endCol {
 		if processedCols[col] {
-			fmt.Printf("Column %d already processed, advancing\n", col)
+			// fmt.Printf("Column %d already processed, advancing\n", col)
 			col++
 			continue
 		}
 
-		fmt.Printf("Looking for cell at column %d\n", col)
+		// fmt.Printf("Looking for cell at column %d\n", col)
 		cellFound := false
 
 		for _, cell := range headerRows[currentRow] {
 			if cell.ColumnIndex == col {
-				fmt.Printf("Found cell at col %d with content: %s\n", col, cell.Content)
+				// fmt.Printf("Found cell at col %d with content: %s\n", col, cell.Content)
 
 				header := models.HeaderColumn{
 					Title: cell.Content,
@@ -263,7 +260,7 @@ func extractChildHeaders(headerRows map[int][]models.TableCell, parentCell model
 
 				nextRow := currentRow + cell.RowSpan
 				if nextRow <= maxRow && cell.RowSpan < maxRow-currentRow+1 {
-					fmt.Printf("Recursing to row %d\n", nextRow)
+					// fmt.Printf("Recursing to row %d\n", nextRow)
 					childHeaders := extractChildHeaders(headerRows, cell, nextRow, maxRow)
 					header.Children = childHeaders
 				}
@@ -277,13 +274,13 @@ func extractChildHeaders(headerRows map[int][]models.TableCell, parentCell model
 		}
 
 		if !cellFound {
-			fmt.Printf("No cell found at column %d, advancing\n", col)
+			// fmt.Printf("No cell found at column %d, advancing\n", col)
 			processedCols[col] = true
 			col++
 		}
 	}
 
-	fmt.Printf("Returning %d children for row %d\n", len(children), currentRow)
+	// fmt.Printf("Returning %d children for row %d\n", len(children), currentRow)
 	return children
 }
 
@@ -291,11 +288,7 @@ func extractChildHeaders(headerRows map[int][]models.TableCell, parentCell model
 func ProcessInvoiceData(table models.Table) (*models.ProcessedInvoice, error) {
 
 	// Get header structure
-	fmt.Println("here1")
 	headers := extractHeaderHierarchy(table)
-
-	fmt.Println("here")
-	fmt.Println(headers)
 
 	// Initialize processed invoice
 	processed := &models.ProcessedInvoice{

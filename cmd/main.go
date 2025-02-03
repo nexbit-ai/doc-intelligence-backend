@@ -55,6 +55,7 @@ func main() {
 	if port == "" {
 		port = "3001"
 	}
+	fmt.Println(port)
 	// // connStr := fmt.Sprintf("user=%s dbname=%s password=%s host=%s port=%s sslmode=%s",
 	// // 	user, dbname, password, host, port, sslmode)
 
@@ -79,7 +80,7 @@ func main() {
 	docService := service.NewDocService(externalDIClient)
 	router.DocRouter(app, docService)
 
-	if err := app.Listen(":" + port); err != nil {
+	if err := app.Listen("0.0.0.0:" + port); err != nil {
 		fmt.Println("Error starting server:", err)
 	}
 }

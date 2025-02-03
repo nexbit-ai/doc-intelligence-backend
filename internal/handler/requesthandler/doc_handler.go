@@ -49,7 +49,7 @@ func ParseDocHandler(docService docService.DocService) fiber.Handler {
 
 func HealthCheckHandler(docService docService.DocService) fiber.Handler {
 	return func(ctx *fiber.Ctx) error {
-		fmt.Println("Health check")
+		fmt.Println("Health check: Success")
 		return ctx.JSON(
 			fiber.Map{
 				"response": "all good",
